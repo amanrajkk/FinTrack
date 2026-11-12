@@ -1,0 +1,24 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sign In | FinTrack</title><link rel="stylesheet" href="style.css"><script src="theme.js"></script></head>
+<body>
+<header class="navbar"><a class="logo" href="index.html">💰 FinTrack</a><nav class="nav-links"><a href="index.html#features">Features</a><a href="signin.html">Sign In</a><a href="register.html">Register</a><button id="themeToggle" class="btn outline" aria-label="Toggle theme"></button></nav></header>
+<main class="card form-box"><h2>Welcome back</h2>
+<div class="alert" id="alertBox" role="alert"></div>
+<form id="f" novalidate>
+<div class="field"><label for="email">Email</label><input id="email" type="email"></div>
+<div class="field"><label for="password">Password</label><input id="password" type="password"><button type="button" class="eye" onclick="toggleEye(this)" aria-label="Show or hide password">👁️</button></div>
+<button class="btn" type="submit">Sign in</button>
+<p>New here? <a href="signup.html">Create an account</a></p>
+</form></main>
+<script src="auth.js"></script>
+<script>
+const box=document.getElementById('alertBox');
+const showAlert=m=>{box.textContent=m;box.style.display='block'};
+document.getElementById('f').addEventListener('submit',function(e){
+  e.preventDefault(); box.style.display='none';
+  const em=document.getElementById('email').value.trim(), pw=document.getElementById('password').value;
+  if(!RE.email.test(em)||pw.length<8) return showAlert('Enter a valid email and a password of at least 8 characters.');
+  const u=getUsers().find(x=>x.email===em&&x.password===pw);
+  if(!u) return showAlert('Incorrect email or password.');
+  localStorage.setItem('fm_session',JSON.stringify({name:u.name,email:em})); location.href='home.html';
+});
+</script></body></html>

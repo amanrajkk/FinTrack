@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sign Up | FinTrack</title><link rel="stylesheet" href="style.css"><script src="theme.js"></script></head>
+<body>
+<header class="navbar"><a class="logo" href="index.html">💰 FinTrack</a><nav class="nav-links"><a href="index.html#features">Features</a><a href="signin.html">Sign In</a><a href="register.html">Register</a><button id="themeToggle" class="btn outline" aria-label="Toggle theme"></button></nav></header>
+<main class="card form-box"><h2>Quick sign up</h2>
+<form id="f" novalidate>
+<div class="field"><label for="email">Email</label><input id="email" type="email"></div>
+<div class="field"><label for="password">Password</label><input id="password" type="password"><button type="button" class="eye" onclick="toggleEye(this)">👁️</button></div>
+<div class="field"><label><input id="terms" type="checkbox"> I agree to the Terms of Service</label></div>
+<button class="btn" type="submit">Sign up</button>
+<p>Have an account? <a href="signin.html">Sign in</a></p>
+</form></main>
+<script src="auth.js"></script>
+<script>
+setupForm(document.getElementById('f'), {
+  email:{test:v=>RE.email.test(v),msg:'Enter a valid email address.'},
+  password:{test:v=>RE.pass.test(v),msg:'Min 8 chars with upper, lower, number and symbol.'},
+  terms:{test:(v,f)=>f.querySelector('#terms').checked,msg:'You must accept the Terms of Service.'}
+}, function(){
+  const em=document.getElementById('email').value.trim();
+  if(!saveUser({name:em.split('@')[0],email:em,password:document.getElementById('password').value})) return alert('This email is already registered.');
+  alert('Account created! Please sign in.'); location.href='signin.html';
+});
+</script></body></html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard | FinTrack</title><link rel="stylesheet" href="style.css"><script src="theme.js"></script></head>
+<body>
+<header class="navbar"><button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button><span class="logo">💰 FinTrack</span>
+<div class="nav-links"><span id="welcome"></span><button id="themeToggle" class="btn outline" aria-label="Toggle theme"></button><button id="logout" class="btn">Log out</button></div></header>
+<main class="dashboard">
+<aside class="sidebar card" id="sidebar"><a href="#summary">Overview</a><a href="#add">Add transaction</a><a href="#history">History</a><a href="#emi">EMI calculator</a><a href="#calc">Calculator</a></aside>
+<section class="main-col">
+<div class="stats" id="summary">
+<div class="card"><small>Balance</small><b id="balance">₹0</b></div>
+<div class="card"><small>Income</small><b id="income">₹0</b></div>
+<div class="card"><small>Expenses</small><b id="expense">₹0</b></div></div>
+<div class="card" id="add"><h3>Add transaction</h3>
+<form id="txForm"><div class="row">
+<div class="field"><label for="title">Title</label><input id="title" required></div>
+<div class="field"><label for="amount">Amount (₹)</label><input id="amount" type="number" min="1" step="0.01" required></div>
+<div class="field"><label for="type">Type</label><select id="type"><option value="expense">Expense</option><option value="income">Income</option></select></div>
+<div class="field"><label for="category">Category</label><select id="category"><option>Food</option><option>Travel</option><option>Bills</option><option>Shopping</option><option>Salary</option><option>Other</option></select></div>
+<div class="field"><label for="date">Date</label><input id="date" type="date" required></div></div>
+<button class="btn" type="submit">Add transaction</button></form></div>
+<div class="card" id="history"><h3>Recent transactions</h3><ul class="list" id="list"></ul></div>
+<div class="card" id="emi"><h3>EMI calculator</h3>
+<div class="row"><div class="field"><label for="p">Loan amount (₹)</label><input id="p" type="number" min="1"></div>
+<div class="field"><label for="r">Interest rate (% / year)</label><input id="r" type="number" min="0" step="0.1"></div>
+<div class="field"><label for="n">Tenure (years)</label><input id="n" type="number" min="1"></div></div>
+<button class="btn" id="emiBtn" type="button">Calculate EMI</button><p id="emiOut"></p></div>
+</section>
+<aside class="panel">
+<div class="card" id="calc-card"><h3>Calculator</h3><div id="calc"></div></div>
+<div class="card"><h3>Spending by category</h3><div id="cats"></div></div>
+</aside></main>
+<script src="calculator.js"></script><script src="chatbot.js"></script><script src="app.js"></script></body></html>

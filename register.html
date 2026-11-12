@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Register | FinTrack</title><link rel="stylesheet" href="style.css"><script src="theme.js"></script></head>
+<body>
+<header class="navbar"><a class="logo" href="index.html">💰 FinTrack</a><nav class="nav-links"><a href="index.html#features">Features</a><a href="signin.html">Sign In</a><a href="register.html">Register</a><button id="themeToggle" class="btn outline" aria-label="Toggle theme"></button></nav></header>
+<main class="card form-box"><h2>Create your account</h2>
+<form id="f" novalidate>
+<div class="field"><label for="fullName">Full name</label><input id="fullName" type="text"></div>
+<div class="field"><label for="empId">Employee / Register ID</label><input id="empId" type="text"></div>
+<div class="field"><label for="email">Email address</label><input id="email" type="email"></div>
+<div class="field"><label for="mobile">Mobile number</label><input id="mobile" type="tel"></div>
+<div class="field"><label for="dept">Division</label><select id="dept"><option value="">Select division</option><option>CSE</option><option>ECE</option><option>EEE</option><option>MECH</option><option>CIVIL</option></select></div>
+<div class="field"><label for="password">Password</label><input id="password" type="password"></div>
+<div class="field"><label for="confirm">Confirm password</label><input id="confirm" type="password"></div>
+<button class="btn" type="submit">Create account</button>
+<p>Already registered? <a href="signin.html">Sign in</a></p>
+</form></main>
+<script src="auth.js"></script>
+<script>
+setupForm(document.getElementById('f'), {
+  fullName:{test:v=>RE.name.test(v),msg:'Use 2-50 letters and spaces only.'},
+  empId:{test:v=>RE.id.test(v),msg:'Use 6-12 letters or numbers.'},
+  email:{test:v=>RE.email.test(v),msg:'Enter a valid email address.'},
+  mobile:{test:v=>RE.mobile.test(v),msg:'Enter 10 digits starting with 6-9.'},
+  dept:{test:v=>v!=='',msg:'Select your division.'},
+  password:{test:v=>RE.pass.test(v),msg:'Min 8 chars with upper, lower, number and symbol (@$!%*?&).'},
+  confirm:{test:(v,f)=>v!==''&&v===f.querySelector('#password').value,msg:'Passwords do not match.'}
+}, function(){
+  const g=id=>document.getElementById(id).value.trim();
+  if(!saveUser({name:g('fullName'),empId:g('empId'),email:g('email'),mobile:g('mobile'),dept:g('dept'),password:document.getElementById('password').value}))
+    return alert('This email is already registered.');
+  alert('Account created! Please sign in.'); location.href='signin.html';
+});
+</script></body></html>
